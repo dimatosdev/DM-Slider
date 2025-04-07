@@ -38,6 +38,8 @@ if ( ! class_exists( 'DM_Slider' ) ) {
         public function __construct() {
             $this->define_constants();
 
+            add_action( 'admin_menu', array( $this, 'add_menu' ) );
+
             require_once( DM_SLIDER_PATH . 'post-types/class.dm-slider-cpt.php' );
             $DM_Slider_Post_Type = new DM_Slider_Post_Type();
         }
@@ -60,6 +62,43 @@ if ( ! class_exists( 'DM_Slider' ) ) {
         public static function uninstall(){
 
         }
+
+        public function add_menu(){
+            add_menu_page( 
+                'DM Slider Options', 
+                'DM Slider', 
+                'manage_options', 
+                'dm-slider-admin', 
+                array( $this, 'dm_slider_settings_page' ), 
+                'dashicons-images-alt2', 
+                
+            );
+
+            add_submenu_page(
+                'dm-slider-admin',
+                'Manage Slides',
+                'Manage Slides',
+                'manage_options',
+                'edit.php?post_type=dm-slider',
+                null,
+                null,
+            );
+
+            add_submenu_page(
+                'dm-slider-admin',
+                'Add New Slide',
+                'Add New Slide',
+                'manage_options',
+                'post-new.php?post_type=dm-slider',
+                null,
+                null,
+            );
+        }
+
+        public function dm_slider_settings_page(){
+            echo "This is a settings page for DM Slider";
+        }
+        
     }
 }
 if ( class_exists( 'DM_Slider' ) ) {
