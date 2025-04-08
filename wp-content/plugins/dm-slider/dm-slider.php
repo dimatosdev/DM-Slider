@@ -42,6 +42,9 @@ if ( ! class_exists( 'DM_Slider' ) ) {
 
             require_once( DM_SLIDER_PATH . 'post-types/class.dm-slider-cpt.php' );
             $DM_Slider_Post_Type = new DM_Slider_Post_Type();
+
+            require_once( DM_SLIDER_PATH . 'class.dm-slider-settings.php' );
+            $DM_Slider_Settings = new DM_Slider_Settings();
         }
 
         public function define_constants(){
@@ -96,7 +99,15 @@ if ( ! class_exists( 'DM_Slider' ) ) {
         }
 
         public function dm_slider_settings_page(){
-            echo "This is a settings page for DM Slider";
+            if ( ! current_user_can( 'manage_options' ) ) {
+                return;
+            }
+            if ( ! isset( $_GET['settings-updated'] ) ) {
+                add_settings_error( 'dm_slider_options', 'dm_slider_message', 'Settings Saved', 'success' );
+            }
+            settings_errors( 'dm_slider_options' );
+            
+            require( DM_SLIDER_PATH . 'views/settings-page.php' );
         }
         
     }
