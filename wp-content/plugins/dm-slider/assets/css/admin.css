@@ -1,0 +1,11 @@
+.dm-slider-metabox label {
+    color: #f00;
+}
+
+.dm-slider-metabox td {
+    padding: 5px;
+}
+
+.dm-slider-metabox th {
+    padding: 10px 10px 5px 0;
+}
