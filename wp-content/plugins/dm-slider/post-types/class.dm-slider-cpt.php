@@ -12,28 +12,30 @@ if ( ! class_exists('DM_Slider_Post_Type') ) {
         }
         
         public function create_post_type() {
-            register_post_type( 'dm-slider', array(
-                'label' => 'DM Slider',
-                'description' => 'DM Slider',
-                'labels' => array(
-                    'name' => 'DM Sliders',
-                    'singular_name' => 'DM Slider'
-                ),
-                'public' => true,
-                'supports' => array( 'title', 'editor', 'thumbnail' ),
-                'hierarchical' => false,
-                'show_ui' => true,
-                'show_in_menu' => false,
-                'menu_position' => 5,
-                'show_in_admin_bar' => true,
-                'show_in_nav_menus' => true,
-                'can_export' => true,
-                'has_archive' => false,
-                'exclude_from_search' => false,
-                'publicly_queryable' => true,
-                'show_in_rest' => true,
-                'menu_icon' => 'dashicons-images-alt2',
-                //'register_meta_box_cb' => array( $this, 'add_meta_boxes' ),
+            register_post_type( 
+                'dm-slider',
+                 array(
+                    'label' => esc_html__('DM Slider', 'dm-slider'),
+                    'description' => esc_html__('DM Slider', 'dm-slider'),
+                    'labels' => array(
+                        'name' => esc_html__('DM Sliders', 'dm-slider'),
+                        'singular_name' => esc_html__('DM Slider', 'dm-slider'),
+                    ),
+                    'public' => true,
+                    'supports' => array( 'title', 'editor', 'thumbnail' ),
+                    'hierarchical' => false,
+                    'show_ui' => true,
+                    'show_in_menu' => false,
+                    'menu_position' => 5,
+                    'show_in_admin_bar' => true,
+                    'show_in_nav_menus' => true,
+                    'can_export' => true,
+                    'has_archive' => false,
+                    'exclude_from_search' => false,
+                    'publicly_queryable' => true,
+                    'show_in_rest' => true,
+                    'menu_icon' => 'dashicons-images-alt2',
+                    //'register_meta_box_cb' => array( $this, 'add_meta_boxes' ),
             ) );
         }
 
@@ -63,7 +65,7 @@ if ( ! class_exists('DM_Slider_Post_Type') ) {
         public function add_meta_boxes() {
             add_meta_box(
                 'dm_slider_meta_box',
-                'DM Slider Options',
+                esc_html__('DM Slider Options', 'dm-slider'),
                 array( $this, 'add_inner_meta_boxes' ),
                 'dm-slider',
                 'normal',
@@ -101,7 +103,7 @@ if ( ! class_exists('DM_Slider_Post_Type') ) {
                 $new_link_url = $_POST['dm-slider-link-url'];
 
                 if( empty( $new_link_text ) ) {
-                    update_post_meta( $post_id, 'dm_slider_link_text', 'Add some text' );
+                    update_post_meta( $post_id, 'dm_slider_link_text', __('Add some text' , 'dm-slider'));
                 }else {
                     update_post_meta( $post_id, 'dm_slider_link_text', sanitize_text_field($new_link_text), $old_link_text );
                 }

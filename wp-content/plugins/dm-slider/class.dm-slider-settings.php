@@ -15,21 +15,21 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
             
             add_settings_section(
                 'dm_slider_main_section',
-                'How does it work?',
+                esc_html__('How does it work?', 'dm-slider'),
                 null,
                 'dm-slider-page1'
             );
 
             add_settings_section(
                 'dm_slider_second_section',
-                'Other plugin Options',
+                esc_html__('Other plugin Options', 'dm-slider'),
                 null,
                 'dm-slider-page2'
             );
 
             add_settings_field(
                 'dm_slider_shortcode',
-                'Shortcode',
+                esc_html__('Shortcode', 'dm-slider1'),
                 array( $this, 'dm_slider_shortcode_callback' ),
                 'dm-slider-page1',
                 'dm_slider_main_section'
@@ -37,7 +37,7 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
 
             add_settings_field(
                 'dm_slider_title',
-                'Slider Title',
+                esc_html__('Slider Title', 'dm-slider'),
                 array( $this, 'dm_slider_title_callback' ),
                 'dm-slider-page2',
                 'dm_slider_second_section',
@@ -48,7 +48,7 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
 
             add_settings_field(
                 'dm_slider_bullets',
-                'Display Bullets',
+                esc_html__('Display Bullets', 'dm-slider'),
                 array( $this, 'dm_slider_bullets_callback' ),
                 'dm-slider-page2',
                 'dm_slider_second_section',
@@ -59,7 +59,7 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
 
             add_settings_field(
                 'dm_slider_style',
-                'Slider Styles',
+                esc_html__('Slider Styles', 'dm-slider'),
                 array( $this, 'dm_slider_styles_callback' ),
                 'dm-slider-page2',
                 'dm_slider_second_section',
@@ -76,7 +76,7 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
 
         public function dm_slider_shortcode_callback() {
             ?>
-            <span>Use the shortcode [dm_slider] to display the slider in any page/post/widget</span>
+            <span><?php esc_html_e('Use the shortcode [dm_slider] to display the slider in any page/post/widget', 'dm-slider')?></span>
             <?php
         }
 
@@ -100,7 +100,7 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
                 value="1"
                 <?php checked( '1', isset(self::$options['dm_slider_bullets']) ? self::$options['dm_slider_bullets'] : '' ) ?>
             />
-            <label for="dm_slider_bullets">Check to display bullets</label>
+            <label for="dm_slider_bullets"><?php _e('Check to display bullets', 'dm-slider')?></label>
             <?php
         }
 
@@ -134,10 +134,10 @@ if ( ! class_exists( 'DM_Slider_Settings' ) ) {
                             add_settings_error(
                                 'dm_slider_options',
                                 'dm_slider_message',
-                                'The title field is required',
+                                __('The title field is required', 'dm-slider'),
                                 'error'
                             );
-                            $value = 'DM Slider';
+                            $value = esc_html__('Please, type some text', 'dm-slider');
                         }
                         $value = sanitize_text_field($value); // Sanitiza o título
                         break;

@@ -38,6 +38,8 @@ if ( ! class_exists( 'DM_Slider' ) ) {
         public function __construct() {
             $this->define_constants();
 
+            $this->load_textdomain();
+
             require_once( DM_SLIDER_PATH . 'functions/functions.php' );
 
             add_action( 'admin_menu', array( $this, 'add_menu' ) );
@@ -75,10 +77,14 @@ if ( ! class_exists( 'DM_Slider' ) ) {
 
         }
 
+        public function load_textdomain(){
+            load_plugin_textdomain( 'dm-slider', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        }
+
         public function add_menu(){
             add_menu_page( 
-                'DM Slider Options', 
-                'DM Slider', 
+                esc_html__('DM Slider Options', 'dm-slider'), 
+                esc_html__('DM Slider', 'dm-slider'), 
                 'manage_options', 
                 'dm-slider-admin', 
                 array( $this, 'dm_slider_settings_page' ), 
@@ -88,8 +94,8 @@ if ( ! class_exists( 'DM_Slider' ) ) {
 
             add_submenu_page(
                 'dm-slider-admin',
-                'Manage Slides',
-                'Manage Slides',
+                esc_html__('Manage Slides', 'dm-slider'),
+                esc_html__('Manage Slides', 'dm-slider'),
                 'manage_options',
                 'edit.php?post_type=dm-slider',
                 null,
@@ -98,8 +104,8 @@ if ( ! class_exists( 'DM_Slider' ) ) {
 
             add_submenu_page(
                 'dm-slider-admin',
-                'Add New Slide',
-                'Add New Slide',
+                esc_html__('Add New Slide', 'dm-slider'),
+                esc_html__('Add New Slide', 'dm-slider'),
                 'manage_options',
                 'post-new.php?post_type=dm-slider',
                 null,
@@ -112,7 +118,7 @@ if ( ! class_exists( 'DM_Slider' ) ) {
                 return;
             }
             if ( ! isset( $_GET['settings-updated'] ) ) {
-                add_settings_error( 'dm_slider_options', 'dm_slider_message', 'Settings Saved', 'success' );
+                add_settings_error( 'dm_slider_options', 'dm_slider_message', esc_html__('Settings Saved', 'dm-slider'), 'success' );
             }
             settings_errors( 'dm_slider_options' );
             

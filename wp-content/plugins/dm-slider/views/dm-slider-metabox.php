@@ -3,7 +3,7 @@
     <tbody>
         <tr>
             <th>
-                <label for="dm-slider-link-text">Link Text</label>
+                <label for="dm-slider-link-text"><?php esc_html_e('Link Text', 'dm-slider') ?></label>
             </th>
             <td>
             <input 
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <th>   
-                <label for="dm-slider-link-url">Link URL</label>
+                <label for="dm-slider-link-url"><?php esc_html_e('Link URL', 'dm-slider') ?></label>
             </th>
             <td>
             <input
