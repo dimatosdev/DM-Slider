@@ -74,7 +74,17 @@ if ( ! class_exists( 'DM_Slider' ) ) {
         }
 
         public static function uninstall(){
-
+            $posts = get_posts( 
+                array( 
+                    'post_type' => 'dm-slider', 
+                    'numberposts' => -1, 
+                    'post_status' => 'any' 
+                    ) 
+            );
+            foreach( $posts as $post ){
+                wp_delete_post( $post->ID, true );
+            }
+            delete_option( 'dm_slider_options' );
         }
 
         public function load_textdomain(){
